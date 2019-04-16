@@ -1,30 +1,15 @@
 <template>
-<div>
-  <h1>Register for an account</h1>
-  <form @submit.prevent="register" class="pure-form pure-form-aligned">
-    <fieldset>
-      <p class="pure-form-message-inline">All fields are required.</p>
-
-      <div class="pure-control-group">
-        <label for="name">Real Name</label>
-        <input v-model="name" type="text" placeholder="Real Name">
-      </div>
-
-      <div class="pure-control-group">
-        <label for="username">Username</label>
-        <input v-model="username" type="text" placeholder="Username">
-      </div>
-
-      <div class="pure-control-group">
-        <label for="password">Password</label>
-        <input v-model="password" type="password" placeholder="Password">
-      </div>
-
-      <div class="pure-controls">
-        <button type="submit" class="pure-button pure-button-primary">Submit</button>
-      </div>
-    </fieldset>
-  </form>
+<div class="register">
+  <div class="box">
+    Sign In
+    <form method="post" @submit.prevent="register">
+      <input type="text" name="username" placeholder="Username" class="input" v-model="username">
+      <input type="password" name="password" placeholder="Password" class="input" v-model="password">
+      <input type="text" name="fName" placeholder="First Name" class="input" v-model="firstname">
+      <input type="text" name="lName" placeholder="Last Name" class="input" v-model="lastname">
+      <input type="submit" class="registerbutton" name="Register" value="Register">
+    </form>
+  </div>
   <p v-if="error" class="error">{{error}}</p>
 </div>
 </template>
@@ -34,11 +19,17 @@ export default {
   name: 'register',
   data() {
     return {
-      name: '',
+      firstname: '',
+      lastname: '',
       username: '',
       password: '',
       error: '',
     }
+  },
+  computed: {
+    name() {
+      return this.firstname + " " + this.lastname;
+    },
   },
   methods: {
     async register() {
@@ -58,19 +49,41 @@ export default {
 }
 </script>
 
-<style scoped>
-form {
-  border: 1px solid #ccc;
-  background-color: #eee;
-  border-radius: 4px;
-  padding: 20px;
+<style>
+.box {
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -250px;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    color: #424242;
 }
 
-.pure-controls {
-  display: flex;
+.input {
+    width: 80%;
+    height: 30px;
+    margin: 5px;
+    border-radius: 2px;
+    text-align: left;
+    padding: 5px;
+    border: 1px solid #45c693;
 }
 
-.pure-controls button {
-  margin-left: auto;
+.registerbutton {
+    width: 83%;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 2px;
+    text-align: center;
+    background-color: rgb(42, 170, 212);
+    color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
 }
 </style>

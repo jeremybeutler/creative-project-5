@@ -15,13 +15,14 @@
           <li class="nav-item" id="nav-login">
             <router-link class="nav-link" to="/login"><font-awesome-icon icon="bell"/> Login</router-link>
           </li>
-          <li class="nav-item" id="nav-admin">
-            <router-link class="nav-link" to="/admin"><font-awesome-icon icon="tools"/> Admin</router-link>
-          </li>
         </ul>
       </div>
     </nav>
     <router-view/>
+    <footer class="container login-footer">
+      <p>©2018-2019 Tweeter, Inc. <a href="#">Privacy </a><a href="#">Terms</a></p>
+      <a href="https://github.com/jrem13/creative-project-5">Github repo</a>
+    </footer>
   </div>
 </template>
 
@@ -38,5 +39,12 @@
     font-size: 24px;
     padding-top: 0px;
     color: rgb(42, 170, 212);
+}
+
+footer.login-footer {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 20%;
+  background-color: gainsboro;
 }
 </style>
