@@ -21,7 +21,7 @@ const users = require("./users.js");
 app.use("/api/users", users.routes);
 
 const tweets = require("./tweets.js");
-app.use("/api/photos", photos.routes);
+app.use("/api/tweets", tweets.routes);
 
 const comments = require("./comments.js");
 app.use("/api/comments", comments.routes);
