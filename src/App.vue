@@ -193,4 +193,13 @@ footer.login-footer {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+footer {
+  position:fixed;
+  left:0px;
+  bottom:0px;
+  height:30px !important;
+  width:100%;
+  background:#999;
+}
 </style>
