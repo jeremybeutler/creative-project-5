@@ -4,7 +4,8 @@ import Home from './views/Home.vue'
 import Register from './views/Register.vue'
 import Login from './views/Login.vue'
 import Feed from './views/Feed.vue'
-import Tweet from './views/Tweet.vue'
+import TweetPage from './views/TweetPage.vue'
+import Profile from './views/Profile.vue'
 
 Vue.use(Router)
 
@@ -33,9 +34,14 @@ export default new Router({
       component: Login
     },
     {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
       path: '/tweet/:id',
-      name: 'tweet',
-      component: Tweet
+      name: 'tweetpage',
+      component: TweetPage
     }
   ]
 })

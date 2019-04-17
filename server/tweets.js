@@ -56,7 +56,7 @@ router.get("/", auth.verifyToken, User.verify, async (req, res) => {
       user: req.user
     }).sort({
       created: -1
-    });
+    }).populate('user');
     return res.send(tweets);
   } catch (error) {
     console.log(error);
@@ -67,7 +67,7 @@ router.get("/", auth.verifyToken, User.verify, async (req, res) => {
 // get all tweets
 router.get("/all", async (req, res) => {
     try {
-      let tweets = await Photo.find().sort({
+      let tweets = await Tweet.find().sort({
         created: -1
       }).populate('user');
       return res.send(tweets);
@@ -87,6 +87,36 @@ router.get("/single/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
+  }
+});
+
+router.put("/likeTweet/:id", auth.verifyToken, User.verify, async (req, res) => {
+  try {
+    let tweet = await Tweet.findOne({
+      _id: req.params.id 
+    });
+    tweet.likeCount++;
+    tweet.save();
+    res.sendStatus(200);
+  }
+  catch {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+router.put("/retweetTweet/:id", auth.verifyToken, User.verify, async (req, res) => {
+  try {
+    let tweet = await Tweet.findOne({
+      _id: req.params.id 
+    });
+    tweet.retweetCount++;
+    tweet.save();
+    res.sendStatus(200);
+  }
+  catch {
+    console.log(error);
+    res.sendStatus(500);
   }
 });
 

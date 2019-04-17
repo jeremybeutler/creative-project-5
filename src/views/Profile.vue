@@ -1,6 +1,17 @@
 <template>
 <div>
-  <div class="columns-container row">
+  <div v-if="user">
+    <div class="header">
+      <div>
+        <h1>{{user.name}}</h1>
+      </div>
+      <div>
+        <p>
+          <a href="#" @click="logout"><font-awesome-icon icon="sign-out-alt"/></a>
+        </p>
+      </div>
+    </div>
+    <div class="columns-container row">
       <div class="col-sm-3">
       </div>
       <div class="feed-column col-sm-6">
@@ -43,6 +54,12 @@
       <div class="col-sm-4">
       </div>
   </div>
+  </div>
+  <div v-else class="box">
+    <p>If you would like to access your feed, <br>please register for an account or login.</p>
+    <router-link to="/register" class="pure-button">Register</router-link> or
+    <router-link to="/login" class="pure-button">Login</router-link>
+  </div>
 </div>
 </template>
 
@@ -63,7 +80,7 @@ export default {
   },
   async created() {
     await this.$store.dispatch("getUser");
-    await this.$store.dispatch("getAllTweets");
+    await this.$store.dispatch("getMyTweets");
   },
   methods: {
     formatDate(date) {
@@ -82,12 +99,13 @@ export default {
     async likeTweet(tweet) {
         this.$store.commit('setTweet', tweet);
         await this.$store.dispatch("updateTweetLikes");
-        await this.$store.dispatch("getAllTweets");
+        await this.$store.dispatch("getMyTweets");
+        
     },
     async retweetTweet(tweet) {
         this.$store.commit('setTweet', tweet);
         await this.$store.dispatch("updateTweetRetweets");
-        await this.$store.dispatch("getAllTweets");
+        await this.$store.dispatch("getMyTweets");
     },
   }
 }
