@@ -13,10 +13,10 @@
             <router-link class="nav-link" to="/feed"><font-awesome-icon icon="home"/> Feed</router-link>
           </li>
           <li class="nav-item" id="nav-profile">
-            <router-link class="nav-link" to="/profile"><i class="fas fa-user"></i> Profile</router-link>
+            <router-link class="nav-link" to="/profile"><font-awesome-icon icon="user"/> Profile</router-link>
           </li>
-          <li class="nav-item" id="nav-login">
-            <router-link class="nav-link" to="/login"><i class="fas fa-sign-in-alt"></i> Login</router-link>
+          <li class="nav-item" id="nav-logout" v-if="user">
+            <a href="/" class="nav-link" @click="logout"><font-awesome-icon icon="sign-out-alt"/> Logout</a>
           </li>
         </ul>
         <button @click="toggleTweet" id="tweet">Tweet</button>

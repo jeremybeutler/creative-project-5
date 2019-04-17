@@ -1,7 +1,7 @@
 <template>
 <div class="register">
   <div class="box">
-    Sign In
+    <div>Register</div><div v-if="error" class="error">{{error}}</div>
     <form method="post" @submit.prevent="register">
       <input type="text" name="username" placeholder="Username" class="input" v-model="username">
       <input type="password" name="password" placeholder="Password" class="input" v-model="password">
@@ -9,8 +9,8 @@
       <input type="text" name="lName" placeholder="Last Name" class="input" v-model="lastname">
       <input type="submit" class="registerbutton" name="Register" value="Register">
     </form>
+    <p>Already have an accout? <router-link to="/login">Login</router-link></p>
   </div>
-  <p v-if="error" class="error">{{error}}</p>
 </div>
 </template>
 
@@ -49,20 +49,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .box {
-    position: absolute;
     width: 500px;
-    height: 300px;
-    top: 50%;
-    left: 50%;
-    margin: -150px 0 0 -250px;
+    margin: auto;
     background: white;
     padding: 20px;
     border-radius: 5px;
-    text-align: center;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    color: #424242;
+    border: 1px solid black;
+    margin-top: 10%;
 }
 
 .input {
@@ -85,5 +80,10 @@ export default {
     color: white;
     margin-left: 10px;
     margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
 }
 </style>

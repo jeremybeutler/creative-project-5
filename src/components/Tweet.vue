@@ -2,7 +2,7 @@
 <transition v-if="show" name="modal">
   <div class="modal-mask">
     <div class="modal-wrapper">
-      <div class="modal-container">
+      <div class="modal-container" v-if="user">
         <div class="modal-header">
           <h1 class="modal-title">Tweet</h1>
         </div>
@@ -14,6 +14,10 @@
             <button type="submit" class="pure-button pure-button-secondary">Submit</button>
           </form>
         </div>
+      </div>
+      <div class="modal-container" v-else>
+        <p>If you would like to tweet, <br>please register for an account or login.</p>
+        <button type="button" @click="close" class="pure-button">Close</button>
       </div>
     </div>
   </div>
@@ -31,6 +35,11 @@ export default {
       content: '',
       error: '',
     }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
   },
   methods: {
     close() {

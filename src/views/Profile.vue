@@ -56,7 +56,7 @@
   </div>
   </div>
   <div v-else class="box">
-    <p>If you would like to access your feed, <br>please register for an account or login.</p>
+    <p>If you would like to access your profile, <br>please register for an account or login.</p>
     <router-link to="/register" class="pure-button">Register</router-link> or
     <router-link to="/login" class="pure-button">Login</router-link>
   </div>

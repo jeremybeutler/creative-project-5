@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div class="columns-container row">
+<div class="feed">
+  <div class="columns-container row" v-if="user">
       <div class="col-sm-3">
       </div>
       <div class="feed-column col-sm-6">
@@ -42,6 +42,11 @@
       </div>
       <div class="col-sm-4">
       </div>
+  </div>
+  <div v-else class="box">
+    <p>If you would like to access your feed, <br>please register for an account or login.</p>
+    <router-link to="/register" class="pure-button">Register</router-link> or
+    <router-link to="/login" class="pure-button">Login</router-link>
   </div>
 </div>
 </template>
