@@ -9,6 +9,7 @@ export default new Vuex.Store({
     user: null,
     tweets: [],
     tweet: null,
+    comments: [],
   },
   mutations: {
     setUser(state, user) {
@@ -20,10 +21,17 @@ export default new Vuex.Store({
     setTweet(state, tweet) {
       state.tweet = tweet;
     },
+    setTweetID (state, id) {
+      state.tweetID = id;
+    },
+    setComments (state, comments) {
+      state.comments = comments;
+    },
   },
   actions: {
     async register(context, data) {
       try {
+        console.log(data);
         let response = await axios.post("/api/users", data);
         context.commit('setUser', response.data);
         return "";
@@ -101,6 +109,39 @@ export default new Vuex.Store({
       catch(error) {
         return "";
       }
-    }
+    },
+    async getSingleTweet(context) {
+      try {
+        let response = await axios.get("/api/tweets/single/" + this.state.tweetID);
+        context.commit('setTweet', response.data);
+        return "";
+      } catch (error) {
+        return "";
+      }
+    },
+    async addComment(context, data) {
+      try {
+        await axios.post('/api/comments', data);
+        return "";
+      } catch (error) {
+        return error.response.data.message;
+      }
+    },
+    async getComments(context) {
+      try {
+        let response = await axios.get("/api/comments");
+        // console.log(response.data)
+        // console.log(this.state.photo._id);
+        let tweetComments = [];
+        for (let comment in response.data)
+          if (response.data[comment].tweet._id == this.state.tweet._id)
+            tweetComments.push(response.data[comment]);
+            
+        context.commit('setComments', tweetComments);
+        return "";
+      } catch (error) {
+        return "";
+      }
+    },
   }
 })

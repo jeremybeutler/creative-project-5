@@ -4,6 +4,15 @@ const express = require("express");
 const router = express.Router();
 const auth = require("./auth.js");
 
+// Configure multer so that it will upload to '/public/images'
+const multer = require('multer')
+const upload = multer({
+  dest: '../public/images/',
+  limits: {
+    fileSize: 10000000
+  }
+});
+
 const SALT_WORK_FACTOR = 10;
 
 const userSchema = new mongoose.Schema({
@@ -82,10 +91,15 @@ userSchema.statics.verify = async function(req, res, next) {
 const User = mongoose.model('User', userSchema);
 
 // create a new user
-router.post('/', async (req, res) => {
+router.post('/', upload.single('photo'), async (req, res) => {
   if (!req.body.username || !req.body.password || !req.body.name)
     return res.status(400).send({
       message: "Name, username, and password are required."
+    });
+
+  if (!req.file)
+    return res.status(400).send({
+      message: "Must upload a file."
     });
 
   try {
@@ -103,7 +117,8 @@ router.post('/', async (req, res) => {
     const user = new User({
       username: req.body.username,
       password: req.body.password,
-      name: req.body.name
+      name: req.body.name,
+      imagePath: "/images/" + req.file.filename
     });
     await user.save();
     login(user, res);

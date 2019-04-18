@@ -106,10 +106,11 @@ export default {
 }
 
 footer.login-footer {
-  position: absolute;
+  left: 0px;
   bottom: 0px;
-  margin-left: 20%;
-  background-color: gainsboro;
+  height: 68px !important;
+  width: 100%;
+  background: gainsboro;
 }
 
 #tweet {

@@ -7,6 +7,7 @@
       <input type="password" name="password" placeholder="Password" class="input" v-model="password">
       <input type="text" name="fName" placeholder="First Name" class="input" v-model="firstname">
       <input type="text" name="lName" placeholder="Last Name" class="input" v-model="lastname">
+      <label>Profile Picture</label><input type="file" name="photo" @change="fileChanged">
       <input type="submit" class="registerbutton" name="Register" value="Register">
     </form>
     <p>Already have an accout? <router-link to="/login">Login</router-link></p>
@@ -23,6 +24,7 @@ export default {
       lastname: '',
       username: '',
       password: '',
+      file: null,
       error: '',
     }
   },
@@ -32,13 +34,20 @@ export default {
     },
   },
   methods: {
+    fileChanged(event) {
+        this.file = event.target.files[0]
+        console.log(this.file)
+    },
     async register() {
       try {
-        this.error = await this.$store.dispatch("register", {
-          name: this.name,
-          username: this.username,
-          password: this.password
-        });
+        console.log(this.file)
+        const formData = new FormData();
+        formData.append('photo', this.file, this.file.name);
+        formData.append('name', this.name);
+        formData.append('username', this.username);
+        formData.append('password', this.password);
+        console.log(formData);
+        this.error = await this.$store.dispatch("register", formData);
         if (this.error === "")
           this.$router.push('feed');
       } catch (error) {

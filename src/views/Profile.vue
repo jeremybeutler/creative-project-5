@@ -18,7 +18,7 @@
           <div v-for="tweet in tweets" v-bind:key="tweet._id">
               <div class="tweet-card row">
                   <div class="tweet-image col-sm-2">
-                      <img :src="tweet.usrImgPath" class="thumbnail-image">
+                      <img :src="tweet.user.imagePath" class="thumbnail-image">
                   </div>
                   <div class="tweet-content col-sm-10">
                       <div class="tweet-header row">
@@ -28,11 +28,11 @@
                           {{ tweet.content }}
                       </div>
                       <div class="tweet-footer row" style="height: 40px;">
-                          <div class="col-sm-2 text-center">Comment</div>
+                          <router-link :to="`/tweet/${tweet._id}`">Comments</router-link>
                           <div class="col-sm-2 text-center">
                               <button @click="likeTweet(tweet)">
                                   <div class="icon-container">
-                                      <i class="far fa-heart"></i>
+                                    <font-awesome-icon icon="heart" />
                                   </div>
                                   <span class="count-container">{{ tweet.likeCount }}</span>
                               </button>
@@ -40,7 +40,7 @@
                           <div class="col-sm-2 text-center">
                               <button @click="retweetTweet(tweet)">
                                   <div class="icon-container">
-                                      <i class="fas fa-retweet"></i>
+                                    <font-awesome-icon icon="retweet" />
                                   </div>
                                   <span class="count-container">{{ tweet.retweetCount }}</span>
                               </button>

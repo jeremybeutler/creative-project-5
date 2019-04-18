@@ -82,7 +82,7 @@ router.get("/single/:id", async (req, res) => {
   try {
     let tweet = await Tweet.findOne({
       _id: req.params.id
-    }).populate('tweet');
+    }).populate('user');
     return res.send(tweet);
   } catch (error) {
     console.log(error);

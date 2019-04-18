@@ -9,9 +9,12 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faRetweet } from '@fortawesome/free-solid-svg-icons'
+import { faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faHome, faUser, faSignInAlt, faSignOutAlt)
+library.add(faHome, faUser, faSignInAlt, faSignOutAlt, faHeart, faRetweet, faComment)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
